@@ -1,0 +1,97 @@
+//	Browser reset.
+
+blockquote, h1, h2, h3, ol, p, pre, table, ul {
+	font-weight: normal;
+	margin: 0;
+}
+
+//	Mathematical operations.
+
+@function exponent($base, $exponent) {
+	$value: $base;
+	@if $exponent > 1 {
+			@for $i from 2 through $exponent {
+					$value: $value * $base;
+			} 
+	}
+	@if $exponent < 1 {
+			@for $i from 0 through -$exponent {
+					$value: $value / $base;
+			}
+	}
+	@return $value; 
+}
+
+@function sqrt($number) {
+	$guess: random();
+	$root: $guess;
+	@for $i from 1 through 100 {
+			$root: $root - (exponent($root, 2) - $number) / (2 * $root);
+	}
+	@return $root;
+}
+
+//	Miscellaneous calculations.
+
+@function gold() {
+	@return 1/2 + sqrt(5) / 2;
+}
+
+@function pxRem($px) {
+	$rem: $px / $base;
+	@return $rem + rem;
+}
+
+@mixin heading($step) {
+	$computing: $step - 1;
+	$font-size: exponent($ratio, $step);
+	
+	$line: exponent($ratio, -$computing);
+	$line-height: $line * $step;
+
+	$margin-top: $ratio;
+	$margin-bottom: $margin-top * $computing;
+	
+	font-size: $font-size + em;
+	line-height: $line-height;
+	margin-bottom: $margin-bottom + rem;
+	margin-top: $margin-top + rem;
+	
+	@if ($step == 1) {
+		line-height: $line-height + 1;
+	}
+}
+
+//	Configuration.
+
+$base: 16;					//	Simple px to rem conversion.	PX
+$max-size: 21;				//	Maximum body font-size in px.	PX
+$min-size: 18;				//	Minimum body font-size in px.	PX
+$ratio: gold();				// 	The typographic scale.			Function / Number
+
+//	and-typography.
+
+html {
+	font-size: responsive pxRem($min-size) pxRem($max-size);
+}
+
+body {
+	font-size: 1 + em;
+	line-height: $ratio;
+}
+
+h1 {
+	@include heading(3);
+}
+
+h2 {
+	@include heading(2);
+}
+
+h3 {
+	@include heading(1);
+}
+
+blockquote, ol, p, pre, table, ul {
+	margin-bottom: $ratio + em;
+}

@@ -1,0 +1,29 @@
+{
+  "name": "and-typeface",
+  "version": "1.0.0",
+  "description": "andgin web typography system",
+  "main": "build/and-typeface.js",
+  "scripts": {
+    "build": "node build/and-typeface.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hydroandgin/and-typeface.git"
+  },
+  "keywords": [
+    "andgin",
+    "front-end",
+    "typography"
+  ],
+  "author": "Kane Ontwood",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hydroandgin/and-typeface/issues"
+  },
+  "homepage": "https://github.com/hydroandgin/and-typeface#readme",
+  "devDependencies": {
+    "@csstools/postcss-sass": "^3.0.0",
+    "postcss": "^7.0.5",
+    "postcss-responsive-type": "^1.0.0"
+  }
+}
